@@ -31,14 +31,8 @@ class Fixed
 
 };
 
-std::ostream & operator<<(std::ostream & o, Fixed & rhs)
-{
-	o << rhs.getRawBits();
-	return (o);
-}
+std::ostream & operator<<(std::ostream & o, const Fixed & rhs);
 
 /***************************************************************************************/
-
-// int 0000 0000 | 0000 0000 | 0000 0000 | 0000 0000
 
 #endif
