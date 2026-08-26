@@ -35,11 +35,6 @@ Fixed & Fixed::operator=(const Fixed & to_copy)
 	return (*this);
 }
 
-std::ostream & operator<<(std::ostream & o, Fixed & f)
-{
-	//a remplir
-}
-
 /***************************************************************************************/
 
 int Fixed::getRawBits() const 

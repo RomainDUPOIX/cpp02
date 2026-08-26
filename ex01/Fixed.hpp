@@ -31,7 +31,11 @@ class Fixed
 
 };
 
-std::ostream & operator<<(std::ostream & o, Fixed & f);
+std::ostream & operator<<(std::ostream & o, Fixed & rhs)
+{
+	o << rhs.getRawBits();
+	return (o);
+}
 
 /***************************************************************************************/
 
