@@ -6,7 +6,7 @@
 #    By: rdupoix <rdupoix@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/19 14:32:20 by ehuet             #+#    #+#              #
-#    Updated: 2026/08/03 10:17:12 by rdupoix          ###   ########.fr        #
+#    Updated: 2026/08/26 13:08:20 by rdupoix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,13 @@ CFLAGS		= -Wall -Wextra -Werror -std=c++98 -g
 
 # **************************************************************************** #
 
-SRCS		=	main.cpp  \
-				Zombie.cpp \
-				newZombie.cpp \
-				randomChump.cpp
+SRCS		=	main.cpp \
+				Fixed.cpp
 
 OBJS_DIR	= objs
 OBJS		= $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
 
-HEADERS		=	Zombie.hpp \
+HEADERS		=	Fixed.hpp \
 
 # **************************************************************************** #
 
