@@ -2,27 +2,29 @@
 
 /***************************************************************************************/
 
-Fixed::Fixed() : _fixed(0) {}
-Fixed::~Fixed() {}
+Fixed::Fixed() : _fixed(0) {std::cout << "Default constructor called" << std::endl;}
+Fixed::~Fixed() {std::cout << "Destructor called" << std::endl;}
 
 /***************************************************************************************/
 
 Fixed::Fixed(const int i) 
 {
+	std::cout << "Int constructor called" << std::endl;
 	this->_fixed = i;
 	this->_fixed = this->_fixed << this->_fractionalPart;
 }
 
 Fixed::Fixed(const float f)
 {
+	std::cout << "Float constructor called" << std::endl;
 	this->_fixed = roundf((1 << _fractionalPart) * f);
 }
 
 Fixed::Fixed(const Fixed & copy) 
 {
+	std::cout << "Copy constructor called" << std::endl;
 	operator=(copy);
 }
-
 
 /***************************************************************************************/
 
@@ -44,23 +46,23 @@ bool Fixed::operator==(const Fixed & rhs) const {return (this->_fixed == rhs._fi
 
 bool Fixed::operator!=(const Fixed & rhs) const {return (this->_fixed != rhs._fixed);}
 
-Fixed Fixed::operator+(const Fixed & rhs)
+Fixed Fixed::operator+(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = this->_fixed + rhs._fixed;
+	result = ((float)this->_fixed / (1 << 8)) + ((float)rhs._fixed / (1 << 8));
 	return (result);
 }
 
-Fixed Fixed::operator-(const Fixed & rhs)
+Fixed Fixed::operator-(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = this->_fixed - rhs._fixed;
+	result = ((float)this->_fixed / (1 << 8)) - ((float)rhs._fixed / (1 << 8));
 	return (result);
 }
 
-Fixed Fixed::operator*(const Fixed & rhs)
+Fixed Fixed::operator*(const Fixed & rhs) const
 {
 	Fixed result;
 
@@ -68,7 +70,7 @@ Fixed Fixed::operator*(const Fixed & rhs)
 	return (result);
 }
 
-Fixed Fixed::operator/(const Fixed & rhs)
+Fixed Fixed::operator/(const Fixed & rhs) const
 {
 	Fixed result;
 
