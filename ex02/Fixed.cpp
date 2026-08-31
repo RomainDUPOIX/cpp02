@@ -2,27 +2,24 @@
 
 /***************************************************************************************/
 
-Fixed::Fixed() : _fixed(0) {std::cout << "Default constructor called" << std::endl;}
-Fixed::~Fixed() {std::cout << "Destructor called" << std::endl;}
+Fixed::Fixed() : _fixed(0) {}
+Fixed::~Fixed() {}
 
 /***************************************************************************************/
 
 Fixed::Fixed(const int i) 
 {
-	std::cout << "Int constructor called" << std::endl;
 	this->_fixed = i;
 	this->_fixed = this->_fixed << this->_fractionalPart;
 }
 
 Fixed::Fixed(const float f)
 {
-	std::cout << "Float constructor called" << std::endl;
 	this->_fixed = roundf((1 << _fractionalPart) * f);
 }
 
 Fixed::Fixed(const Fixed & copy) 
 {
-	std::cout << "Copy constructor called" << std::endl;
 	operator=(copy);
 }
 
@@ -31,7 +28,6 @@ Fixed::Fixed(const Fixed & copy)
 
 Fixed & Fixed::operator=(const Fixed & to_copy)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixed = to_copy.getRawBits();
 	return (*this);
 }
@@ -68,7 +64,7 @@ Fixed Fixed::operator*(const Fixed & rhs)
 {
 	Fixed result;
 
-	result = this->_fixed * rhs._fixed;
+	result = ((float)this->_fixed / (1 << 8)) * ((float)rhs._fixed / (1 << 8));
 	return (result);
 }
 
@@ -76,24 +72,26 @@ Fixed Fixed::operator/(const Fixed & rhs)
 {
 	Fixed result;
 
-	result = this->_fixed / rhs._fixed;
+	result = ((float)this->_fixed / (1 << 8)) / ((float)rhs._fixed / (1 << 8));
 	return (result);
 }
+
+Fixed & Fixed::operator++(void)
+{
+	++(this->_fixed);
+	return (*this);
+}
+
 
 Fixed Fixed::operator++(int)
 {
 	Fixed tmp(*this);
-	++(this->_fixed);
+	++(*this);
 	return (tmp);
 }
 
 /***************************************************************************************/
 
-Fixed & Fixed::operator++(void)
-{
-	--(this->_fixed);
-	return (*this);
-}
 
 /***************************************************************************************/
 
@@ -146,7 +144,7 @@ int Fixed::toInt() const
 
 /***************************************************************************************/
 
-Fixed & min(Fixed & first, Fixed & second)
+Fixed & Fixed::min(Fixed & first, Fixed & second)
 {
 	if (first.getRawBits() < second.getRawBits())
 		return (first);
@@ -154,7 +152,7 @@ Fixed & min(Fixed & first, Fixed & second)
 		return (second);
 }
 
-const Fixed & min(const Fixed & first, const Fixed & second)
+const Fixed & Fixed::min(const Fixed & first, const Fixed & second)
 {
 	if (first.getRawBits() < second.getRawBits())
 		return (first);
@@ -162,7 +160,7 @@ const Fixed & min(const Fixed & first, const Fixed & second)
 		return (second);
 }
 
-Fixed & max(Fixed & first, Fixed & second)
+Fixed & Fixed::max(Fixed & first, Fixed & second)
 {
 	if (first.getRawBits() > second.getRawBits())
 		return (first);
@@ -170,10 +168,15 @@ Fixed & max(Fixed & first, Fixed & second)
 		return (second);
 }
 
-const Fixed & max(const Fixed & first, const Fixed & second)
+const Fixed & Fixed::max(const Fixed & first, const Fixed & second)
 {
 	if (first.getRawBits() > second.getRawBits())
 		return (first);
 	else
 		return (second);
 }
+
+/**************************************************************************************/
+
+// 
+// | 128 64 32 16 | 8 4 2 1 |
