@@ -112,7 +112,6 @@ std::ostream & operator<<(std::ostream & o, const Fixed & rhs)
 	return (o);
 }
 
-
 /***************************************************************************************/
 
 int Fixed::getRawBits() const {return (this->_fixed);}
@@ -139,5 +138,34 @@ int Fixed::toInt() const
 
 /***************************************************************************************/
 
-// a++ c'est comme a = a + 1;
+static Fixed & min(Fixed & first, Fixed & second)
+{
+	if (first.getRawBits() < second.getRawBits())
+		return (first);
+	else
+		return (second);
+}
 
+static const Fixed & min(const Fixed & first, const Fixed & second)
+{
+	if (first.getRawBits() < second.getRawBits())
+		return (first);
+	else
+		return (second);
+}
+
+static Fixed & max(Fixed & first, Fixed & second)
+{
+	if (first.getRawBits() > second.getRawBits())
+		return (first);
+	else
+		return (second);
+}
+
+static const Fixed & max(const Fixed & first, const Fixed & second)
+{
+	if (first.getRawBits() > second.getRawBits())
+		return (first);
+	else
+		return (second);
+}

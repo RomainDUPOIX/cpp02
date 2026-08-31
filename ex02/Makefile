@@ -6,11 +6,11 @@
 #    By: rdupoix <rdupoix@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/19 14:32:20 by ehuet             #+#    #+#              #
-#    Updated: 2026/08/26 15:40:20 by rdupoix          ###   ########.fr        #
+#    Updated: 2026/08/31 13:16:16 by rdupoix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ex01
+NAME		= ex02
 CPP			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98 -g
 
