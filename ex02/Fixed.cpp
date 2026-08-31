@@ -51,31 +51,39 @@ bool Fixed::operator!=(const Fixed & rhs) const {return (this->_fixed != rhs._fi
 Fixed Fixed::operator+(const Fixed & rhs)
 {
 	Fixed result;
-	return (this->_fixed + rhs._fixed);
+
+	result = this->_fixed + rhs._fixed;
+	return (result);
 }
 
 Fixed Fixed::operator-(const Fixed & rhs)
 {
 	Fixed result;
-	return (this->_fixed - rhs._fixed);
+
+	result = this->_fixed - rhs._fixed;
+	return (result);
 }
 
 Fixed Fixed::operator*(const Fixed & rhs)
 {
 	Fixed result;
-	return (this->_fixed * rhs._fixed);
+
+	result = this->_fixed * rhs._fixed;
+	return (result);
 }
 
 Fixed Fixed::operator/(const Fixed & rhs)
 {
 	Fixed result;
-	return (this->_fixed / rhs._fixed);
+
+	result = this->_fixed / rhs._fixed;
+	return (result);
 }
 
 Fixed Fixed::operator++(int)
 {
 	Fixed tmp(*this);
-	++(*this);
+	++(this->_fixed);
 	return (tmp);
 }
 
@@ -83,7 +91,7 @@ Fixed Fixed::operator++(int)
 
 Fixed & Fixed::operator++(void)
 {
-	--*this;
+	--(this->_fixed);
 	return (*this);
 }
 
@@ -92,7 +100,7 @@ Fixed & Fixed::operator++(void)
 Fixed Fixed::operator--(int)
 {
 	Fixed tmp(*this);
-	--(*this);
+	--(this->_fixed);
 	return (tmp);
 }
 
@@ -100,7 +108,7 @@ Fixed Fixed::operator--(int)
 
 Fixed & Fixed::operator--(void)
 {
-	--*this;
+	--(this->_fixed);
 	return (*this);
 }
 
@@ -138,7 +146,7 @@ int Fixed::toInt() const
 
 /***************************************************************************************/
 
-static Fixed & min(Fixed & first, Fixed & second)
+Fixed & min(Fixed & first, Fixed & second)
 {
 	if (first.getRawBits() < second.getRawBits())
 		return (first);
@@ -146,7 +154,7 @@ static Fixed & min(Fixed & first, Fixed & second)
 		return (second);
 }
 
-static const Fixed & min(const Fixed & first, const Fixed & second)
+const Fixed & min(const Fixed & first, const Fixed & second)
 {
 	if (first.getRawBits() < second.getRawBits())
 		return (first);
@@ -154,7 +162,7 @@ static const Fixed & min(const Fixed & first, const Fixed & second)
 		return (second);
 }
 
-static Fixed & max(Fixed & first, Fixed & second)
+Fixed & max(Fixed & first, Fixed & second)
 {
 	if (first.getRawBits() > second.getRawBits())
 		return (first);
@@ -162,7 +170,7 @@ static Fixed & max(Fixed & first, Fixed & second)
 		return (second);
 }
 
-static const Fixed & max(const Fixed & first, const Fixed & second)
+const Fixed & max(const Fixed & first, const Fixed & second)
 {
 	if (first.getRawBits() > second.getRawBits())
 		return (first);
