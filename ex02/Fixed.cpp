@@ -30,6 +30,7 @@ Fixed::Fixed(const Fixed & copy)
 
 Fixed & Fixed::operator=(const Fixed & to_copy)
 {
+	std::cout << "Copy assignment operateur called" << std::endl;
 	this->_fixed = to_copy.getRawBits();
 	return (*this);
 }
@@ -50,7 +51,7 @@ Fixed Fixed::operator+(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = ((float)this->_fixed / (1 << 8)) + ((float)rhs._fixed / (1 << 8));
+	result._fixed = this->_fixed + rhs._fixed;
 	return (result);
 }
 
@@ -58,7 +59,7 @@ Fixed Fixed::operator-(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = ((float)this->_fixed / (1 << 8)) - ((float)rhs._fixed / (1 << 8));
+	result._fixed = this->_fixed - rhs._fixed;
 	return (result);
 }
 
@@ -66,7 +67,7 @@ Fixed Fixed::operator*(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = ((float)this->_fixed / (1 << 8)) * ((float)rhs._fixed / (1 << 8));
+	result = this->toFloat() * rhs.toFloat();
 	return (result);
 }
 
@@ -74,7 +75,7 @@ Fixed Fixed::operator/(const Fixed & rhs) const
 {
 	Fixed result;
 
-	result = ((float)this->_fixed / (1 << 8)) / ((float)rhs._fixed / (1 << 8));
+	result = this->toFloat() / rhs.toFloat();
 	return (result);
 }
 
@@ -92,26 +93,24 @@ Fixed Fixed::operator++(int)
 	return (tmp);
 }
 
-Fixed Fixed::operator--(int)
-{
-	Fixed tmp(*this);
-	--(this->_fixed);
-	return (tmp);
-}
-
-/***************************************************************************************/
-
 Fixed & Fixed::operator--(void)
 {
 	--(this->_fixed);
 	return (*this);
 }
 
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp(*this);
+	--(*this);
+	return (tmp);
+}
+
 /***************************************************************************************/
 
 std::ostream & operator<<(std::ostream & o, const Fixed & rhs)
 {
-	o << ((float)rhs.getRawBits() / (1 << 8));
+	o << rhs.toFloat();
 	return (o);
 }
 
